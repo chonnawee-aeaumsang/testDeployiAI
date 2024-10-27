@@ -1,7 +1,7 @@
 const TelegramBot = require("node-telegram-bot-api");
 
-const TOKEN = "8062611798:AAH_j5tKlDREHKR80wUQg0O8R15JG6g3948";
-const gameName = "testiAI"; // Replace with your game's short name
+const TOKEN = "8062611798:AAGblNZBc2xdpYfZXNXbhORXV5MJzQmdYVU";
+const gameName = "testiAIDeploy"; // Replace with your game's short name
 const gameUrl = "https://test-deployi-ai.vercel.app/"; // Your game URL
 
 const bot = new TelegramBot(TOKEN, { polling: false });
