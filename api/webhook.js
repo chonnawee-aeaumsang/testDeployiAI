@@ -1,8 +1,8 @@
 const TelegramBot = require("node-telegram-bot-api");
 
-const TOKEN = "7498251188:AAEYA33RQRMDoe_aUobgOYEnkoo6dOnxtdQ";
+const TOKEN = "8062611798:AAH_j5tKlDREHKR80wUQg0O8R15JG6g3948";
 const gameName = "iAIRobotGame"; // Replace with your game's short name
-const gameUrl = "https://i-ai-robot-build.vercel.app/"; // Your game URL
+const gameUrl = "https://test-deployi-ai.vercel.app/"; // Your game URL
 
 const bot = new TelegramBot(TOKEN, { polling: false });
 
@@ -36,6 +36,7 @@ module.exports = async (req, res) => {
                 //});
             //}
             
+
             // Handle /start or /game command
             if (update.message && (update.message.text === '/start' || update.message.text === '/game')) {
                 const chatId = update.message.from.id;
@@ -50,11 +51,6 @@ module.exports = async (req, res) => {
                 if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
                     await bot.answerCallbackQuery(update.callback_query.id, `Sorry, '${update.callback_query.game_short_name}' is not available.`);
                 } else {
-                    await bot.answerCallbackQuery({
-                        callback_query_id: update.callback_query.id,
-                        url: gameUrl,
-                    });
-
                     const query_id = update.callback_query.id;
                     const firstName = update.callback_query.from.first_name;
                     const userID = update.callback_query.from.id;
