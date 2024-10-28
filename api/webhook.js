@@ -13,15 +13,15 @@ module.exports = async (req, res) => {
 
         try {
             // Detect when the bot is added or the user's first interaction
-            if (update.my_chat_member) {
-                const chatId = update.my_chat_member.chat.id;
-                const firstName = update.my_chat_member.from.first_name;
+            // if (update.my_chat_member) {
+            //     const chatId = update.my_chat_member.chat.id;
+            //     const firstName = update.my_chat_member.from.first_name;
 
-                if (update.my_chat_member.new_chat_member.status === 'member') {
-                    // Send a welcome message when the user adds the bot for the first time
-                    await bot.sendMessage(chatId, `Welcome, ${firstName}! Let's play ${gameName}. You can type /game to start.`);
-                }
-            }
+            //     if (update.my_chat_member.new_chat_member.status === 'member') {
+            //         // Send a welcome message when the user adds the bot for the first time
+            //         await bot.sendMessage(chatId, `Welcome, ${firstName}! Let's play ${gameName}. You can type /game to start.`);
+            //     }
+            // }
             
             //Handle /help command to provide a tutorial
             //if (update.message && update.message.text === '/help') {
@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
             
 
             // Handle /start or /game command
-            if (update.message && (update.message.text === '/game')) {
+            if (update.message && (update.message.text === '/testGame')) {
                 const chatId = update.message.from.id;
                 const firstName = update.message.from.first_name;
                 
@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
             }
 
             // Handle /start
-            if (update.message && (update.message.text === '/start')) {
+            if (update.message && (update.message.text === '/startTest')) {
                 const chatId = update.message.from.id;
                 const firstName = update.message.from.first_name;
                             
