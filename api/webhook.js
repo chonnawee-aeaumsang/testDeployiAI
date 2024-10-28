@@ -52,11 +52,11 @@ module.exports = async (req, res) => {
                 const firstName = update.message.from.first_name;
                             
                 await bot.sendMessage
-                (chatId, `🎮 *Welcome to the iAI Robot Game!* 🚀
+                (chatId, `🎮 <b>Welcome to the iAI Robot Game!<b> 🚀
 A fun Telegram game where you collect iAI tokens, upgrade your strategy, and compete for rewards! 💰
 
-*How to Play*  
-🕹 *Swipe & Collect:* Start with 1,000 energy units. Each swipe earns you iAI coins!  
+How to Play  
+🕹 Swipe & Collect: Start with 1,000 energy units. Each swipe earns you iAI coins!  
 ⚡️ Upgrade Your Core: Boost your energy for higher earnings.  
 🏆 Leaderboard: Climb to the top for big rewards!  
 🎯 Daily Missions: Complete tasks for bonus coins.
