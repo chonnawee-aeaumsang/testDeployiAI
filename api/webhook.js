@@ -3,6 +3,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const TOKEN = "8062611798:AAGblNZBc2xdpYfZXNXbhORXV5MJzQmdYVU";
 const gameName = "testiAIDeploy"; // Replace with your game's short name
 const gameUrl = "https://test-deployi-ai.vercel.app/"; // Your game URL
+const imageUrl = "https://test-deployi-ai.vercel.app/welcome.jpg";// url images
 
 const bot = new TelegramBot(TOKEN, { polling: false });
 
@@ -70,6 +71,8 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
 
     try {
         await bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'MarkdownV2' });
+        // Send the welcome image with a caption
+        await bot.sendPhoto(chatId, imageUrl, {caption: "Here’s some quick info to get you started!",});
     } catch (error) {
         console.error("Error sending welcome message:", error);
     }
