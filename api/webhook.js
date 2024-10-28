@@ -66,9 +66,7 @@ Rewards
 🎁 Complete quests for extra rewards  
 🏆 Top 10 leaderboard winners share a $3,000 USDT Prize Pool!
 
-Ready to play? Hit "*/game*" and start earning! 🔥`, {
-    parse_mode: 'MarkdownV2',
-});
+Ready to play? Hit "*/game*" and start earning! 🔥`, {parse_mode: 'MarkdownV2', });
                 //await bot.sendGame(update.message.from.id, gameName);
             }
 
