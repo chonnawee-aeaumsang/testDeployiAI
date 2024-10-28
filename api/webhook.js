@@ -51,22 +51,29 @@ module.exports = async (req, res) => {
                 const chatId = update.message.from.id;
                 const firstName = update.message.from.first_name;
                             
-                await bot.sendMessage
-                (chatId, `🎮 *Welcome to the iAI Robot Game!* 🚀
+    // Escape necessary characters for MarkdownV2
+    const welcomeMessage = `🎮 *Welcome to the iAI Robot Game!* 🚀
 A fun Telegram game where you collect iAI tokens, upgrade your strategy, and compete for rewards! 💰
 
 *How to Play*  
-🕹 Swipe & Collect: Start with 1,000 energy units. Each swipe earns you iAI coins!  
-⚡️ Upgrade Your Core: Boost your energy for higher earnings.  
+🕹 Swipe & Collect: Start with 1,000 energy units\\. Each swipe earns you iAI coins!  
+⚡️ Upgrade Your Core: Boost your energy for higher earnings\\.  
 🏆 Leaderboard: Climb to the top for big rewards!  
-🎯 Daily Missions: Complete tasks for bonus coins.
+🎯 Daily Missions: Complete tasks for bonus coins\\.
 
-Rewards  
+*Rewards*  
 💰 Earn tokens every play  
 🎁 Complete quests for extra rewards  
 🏆 Top 10 leaderboard winners share a $3,000 USDT Prize Pool!
 
-Ready to play? Hit "*/game*" and start earning! 🔥`, {parse_mode: 'MarkdownV2', });
+Ready to play? Hit "/game" and start earning! 🔥`;
+
+    try {
+        await bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'MarkdownV2' });
+    } catch (error) {
+        console.error("Error sending welcome message:", error);
+    }
+
                 //await bot.sendGame(update.message.from.id, gameName);
             }
 
