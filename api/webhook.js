@@ -46,6 +46,15 @@ module.exports = async (req, res) => {
                 await bot.sendGame(update.message.from.id, gameName);
             }
 
+            // Handle /start
+            if (update.message && (update.message.text === '/start')) {
+                const chatId = update.message.from.id;
+                const firstName = update.message.from.first_name;
+                            
+                await bot.sendMessage(chatId, `Welcome, ${firstName}! 🎉 We’re excited to have you here.`);
+                //await bot.sendGame(update.message.from.id, gameName);
+            }
+
             // Handle callback query for the Play button
             if (update.callback_query) {
                 if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
