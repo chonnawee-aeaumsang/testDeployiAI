@@ -70,9 +70,9 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
 *Ready to play?* Hit "/game" and start earning\\! 🔥`;
 
     try {
-        await bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'MarkdownV2' });
         // Send the welcome image with a caption
-        await bot.sendPhoto(chatId, imageUrl, {caption: "Here’s some quick info to get you started!",});
+        await bot.sendPhoto(chatId, imageUrl);
+        await bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'MarkdownV2' });
     } catch (error) {
         console.error("Error sending welcome message:", error);
     }
