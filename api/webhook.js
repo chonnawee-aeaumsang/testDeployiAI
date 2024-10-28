@@ -3,7 +3,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const TOKEN = "8062611798:AAGblNZBc2xdpYfZXNXbhORXV5MJzQmdYVU";
 const gameName = "testiAIDeploy"; // Replace with your game's short name
 const gameUrl = "https://test-deployi-ai.vercel.app/"; // Your game URL
-const imageUrl = "https://test-deployi-ai.vercel.app/welcome.jpg";// url images
+const imageUrl = "https://drive.google.com/uc?export=view&id=1nUaqx6CMQOom_NM6xlhBQsgoocdFxp2x";// url images
 
 const bot = new TelegramBot(TOKEN, { polling: false });
 
