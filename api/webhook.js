@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
                 const firstName = update.message.from.first_name;
                             
                 await bot.sendMessage
-                (`🎮 Welcome to the iAI Robot Game! 🚀
+                (chatid, `🎮 Welcome to the iAI Robot Game! 🚀
                   A fun Telegram game where you collect iAI tokens, upgrade your strategy, and compete for rewards! 💰
 
                   How to Play  
@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
                  🎁 Complete quests for extra rewards  
                  🏆 Top 10 leaderboard winners share a $3,000 USDT Prize Pool!
 
-                Ready to play? Hit "*/game*" and start earning! 🔥`);
+                 Ready to play? Hit "*/game*" and start earning! 🔥`);
                 //await bot.sendGame(update.message.from.id, gameName);
             }
 
