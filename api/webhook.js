@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
                 const firstName = update.message.from.first_name;
                             
                 await bot.sendMessage
-                (chatid, `🎮 Welcome to the iAI Robot Game! 🚀
+                (chatId, `🎮 Welcome to the iAI Robot Game! 🚀
                   A fun Telegram game where you collect iAI tokens, upgrade your strategy, and compete for rewards! 💰
 
                   How to Play  
