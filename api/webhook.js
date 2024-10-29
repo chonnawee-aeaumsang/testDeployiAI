@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
             // Handle /start or /game command
             if (update.message && update.message.text === '/testGame') {
                 //const chatId = update.message.from.id; //DM
-                const chatId = update.message.from.chat.id; //group respond
+                const chatId = update.message.chat.id; //group respond
                 const firstName = update.message.from.first_name;
                 
                 await bot.sendMessage(chatId, `Welcome, ${firstName}! Let's play ${gameName}.`);
