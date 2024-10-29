@@ -5,6 +5,8 @@ const gameName = "testiAIDeploy"; // Replace with your game's short name
 const gameUrl = "https://test-deployi-ai.vercel.app/"; // Your game URL
 const imageUrl = "https://imgur.com/ZGgcA9c";// url images
 
+const botUsername = 'testiAIDeploy_bot';
+
 const bot = new TelegramBot(TOKEN, { polling: false });
 
 module.exports = async (req, res) => {
@@ -39,7 +41,7 @@ module.exports = async (req, res) => {
             
 
             // Handle /start or /game command
-            if (update.message && update.message.text === '/testGame') {
+            if (update.message && (update.message.text === '/testGame' || update.message.text === `/testGame@${botUsername}`)) {
                 //const chatId = update.message.from.id; //DM
                 const chatId = update.message.chat.id; //group respond
                 const firstName = update.message.from.first_name;
