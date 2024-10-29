@@ -88,16 +88,16 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
                 if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
                     await bot.answerCallbackQuery(update.callback_query.id, `Sorry, '${update.callback_query.game_short_name}' is not available.`);
                 }
-                else if (!update.callback_query.from)
+                else if (typeof update.callback_query.from == "undefined" || typeof update.callback_query.from.id == "undefined")
                 {
                     await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl });
                 }
                 else
                 {
                     const query_id = update.callback_query.id;
-                    const firstName = update.callback_query.from.first_name;
                     const userID = update.callback_query.from.id;
-                    await bot.answerCallbackQuery({callback_query_id: query_id, url: gameUrl + `?query_id=${query_id}&id=${userID}&first_name=${firstName}`});
+                    const firstName = typeof update.callback_query.from.first_name == "undefined" ? "N/A" : update.callback_query.from.first_name;
+                    await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl + `?query_id=${query_id}&id=${userID}&first_name=${firstName}` });
                 }
             }
             // Ensure response is sent only once
