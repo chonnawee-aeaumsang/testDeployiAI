@@ -50,25 +50,6 @@ module.exports = async (req, res) => {
                 await bot.sendGame(chatId, gameName);
             }
 
-            // Handle /playwithemail command
-            if (update.message && (update.message.text === '/playwithemail')) {
-                const chatId = update.message.chat.id;
-                const firstName = update.message.from.first_name;
-
-                // Create a direct link to your game hosted on Vercel
-                const gameUrl = "https://test-deployi-ai.vercel.app/"; // Replace with your Vercel game URL
-
-                // Send a message with a button that links directly to the game
-                await bot.sendMessage(chatId, `Welcome, ${firstName}! Click below to play the game.`, {
-                    reply_markup: {
-                        inline_keyboard: [[{
-                            text: "Play with Email",
-                            url: gameUrl
-                        }]]
-                    }
-                });
-            }
-
             // Handle /start
             if (update.message && update.message.text === '/startTest') {
                 const chatId = update.message.chat.id;
@@ -106,21 +87,27 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
             if (update.callback_query) {
                 if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
                     await bot.answerCallbackQuery(update.callback_query.id, `Sorry, '${update.callback_query.game_short_name}' is not available.`);
-                } else {
+                }
+                else if (!update.callback_query.from)
+                {
+                    await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl });
+                }
+                else
+                {
                     const query_id = update.callback_query.id;
                     const firstName = update.callback_query.from.first_name;
                     const userID = update.callback_query.from.id;
-                    await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl + `?query_id=${query_id}&id=${userID}&first_name=${firstName}` });
+                    await bot.answerCallbackQuery({callback_query_id: query_id, url: gameUrl + `?query_id=${query_id}&id=${userID}&first_name=${firstName}`});
                 }
             }
             // Ensure response is sent only once
             res.status(200).send('OK');
-        } catch (error) {
-            console.error('Error in processing update:', error);
-            res.status(500).send('Internal Server Error');
-        }
-    } else {
-        res.status(405).send('Method Not Allowed');
+    } catch (error) {
+        console.error('Error in processing update:', error);
+        res.status(500).send('Internal Server Error');
     }
+} else {
+    res.status(405).send('Method Not Allowed');
+}
 };
 
