@@ -49,8 +49,8 @@ module.exports = async (req, res) => {
             }
 
             // Handle /start
-            if (update.message && (update.message.text === '/startTest')) {
-                const chatId = update.message.from.id;
+            if (update.message && update.message.text === '/startTest') {
+                const chatId = update.message.chat.id;
                 const firstName = update.message.from.first_name;
                             
     // Escape necessary characters for MarkdownV2
