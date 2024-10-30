@@ -85,8 +85,6 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
 
             // Handle callback query for the Play button
             if (update.callback_query) {
-
-                await bot.sendMessage(update.callback_query.id,update.message.text);
                 if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
                     await bot.answerCallbackQuery(update.callback_query.id, `Sorry, '${update.callback_query.game_short_name}' is not available.`);
                 }
