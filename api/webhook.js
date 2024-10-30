@@ -9,6 +9,16 @@ const botUsername = 'testiAIDeploy_bot';
 
 const bot = new TelegramBot(TOKEN, { polling: false });
 
+// Initialize the Telegram Web App API
+Telegram.WebApp.ready();
+
+// Retrieve user data from the Web App API
+const userId = Telegram.WebApp.initDataUnsafe?.user?.id;
+const firstName = Telegram.WebApp.initDataUnsafe?.user?.first_name;
+
+console.log("User's Telegram ID:", userId);
+console.log("User's First Name:", firstName);
+
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
         const update = req.body;
