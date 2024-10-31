@@ -16,9 +16,17 @@
       Telegram.WebApp.ready();
       const telegramUser = Telegram.WebApp.initDataUnsafe.user;
 
-      if (telegramUser) {
-          console.log("User ID:", telegramUser.id);
-          console.log("Username:", telegramUser.username);
+        if (telegramUser && telegramUser.id) {
+          const userId = telegramUser.id;
+          const username = telegramUser.username || `${telegramUser.first_name} ${telegramUser.last_name || ""}`.trim();
+
+          console.log("User ID:", userId);
+          console.log("Username:", username);  // Will use first_name if username is missing
+
+      // if (telegramUser) {
+      //     console.log("User ID:", telegramUser.id);
+      //     console.log("Username:", telegramUser.username);
+
       } else {
           console.error("User information is not available.");
       }
