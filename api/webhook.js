@@ -103,7 +103,6 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
             //          await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl + `?query_id=${query_id}&id=${userID}&first_name=${firstName}` });
             //      }
             //  }
-
             res.status(200).send('OK');
     } catch (error) {
         console.error('Error in processing update:', error);
