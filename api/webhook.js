@@ -59,39 +59,21 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
 
             // Handle callback query for the Play button
             if (update.callback_query) {
-                const query_id = update.callback_query.id;
-                const userID = update.callback_query.from.id;
-                const firstName = update.callback_query.from.first_name || "N/A";
-
-                if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
-                    await bot.answerCallbackQuery(query_id, { text: `Sorry, '${update.callback_query.game_short_name}' is not available.` });
-                } else {
-                    // Pass userID and firstName to the game URL
-                    await bot.answerCallbackQuery({
-                        callback_query_id: query_id,
-                        url: `${gameUrl}?user_id=${userID}&first_name=${firstName}`
-                    });
-                }
-            }
-
-            // // Handle callback query for the Play button
-            // if (update.callback_query) {
-            //     if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
-            //         await bot.answerCallbackQuery(update.callback_query.id, `Sorry, '${update.callback_query.game_short_name}' is not available.`);
-            //     }
-            //     else if (typeof update.callback_query.from == "undefined" || typeof update.callback_query.from.id == "undefined")
-            //     {
-            //         await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl });
-            //     }
-            //     else
-            //     {
-            //         const query_id = update.callback_query.id;
-            //         const userID = update.callback_query.from.id;
-            //         const firstName = typeof update.callback_query.from.first_name == "undefined" ? "N/A" : update.callback_query.from.first_name;
-            //         await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl + `?query_id=${query_id}&id=${userID}&first_name=${firstName}` });
-            //     }
-            // }
-            // Ensure response is sent only once
+                 if (update.callback_query.game_short_name.toLowerCase() !== gameName.toLowerCase()) {
+                    await bot.answerCallbackQuery(update.callback_query.id, `Sorry, '${update.callback_query.game_short_name}' is not available.`);
+                 }
+                 else if (typeof update.callback_query.from == "undefined" || typeof update.callback_query.from.id == "undefined")
+                 {
+                     await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl });
+                 }
+                 else
+                 {
+                     const query_id = update.callback_query.id;
+                     const userID = update.callback_query.from.id;
+                     const firstName = typeof update.callback_query.from.first_name == "undefined" ? "N/A" : update.callback_query.from.first_name;
+                     await bot.answerCallbackQuery({ callback_query_id: query_id, url: gameUrl + `?query_id=${query_id}&id=${userID}&first_name=${firstName}` });
+                 }
+             }
             res.status(200).send('OK');
     } catch (error) {
         console.error('Error in processing update:', error);
