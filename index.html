@@ -28,6 +28,7 @@
     
       // Initialize Telegram SDK and fetch user data
       Telegram.WebApp.ready();
+      const initData = Telegram.WebApp.initData; // Encoded user data from Telegram
       const telegramUser = Telegram.WebApp.initDataUnsafe.user;
     
       if (telegramUser && telegramUser.id) {
@@ -50,16 +51,6 @@
           console.error("User information is not available.");
           logToServer("User information not available", { error: "No user data received" });
       }
-    
-      // Optionally, log URL query parameters as well (for games launched with query parameters)
-      const urlParams = new URLSearchParams(window.location.search);
-      logToServer("URL query parameters on game launch", {
-          query_string: urlParams.toString(),
-          user_id: urlParams.get("user_id"),
-          username: urlParams.get("username"),
-          first_name: urlParams.get("first_name"),
-          last_name: urlParams.get("last_name")
-      });
     </script>
 
   </head>
