@@ -130,7 +130,7 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
 
 // Function to send a one-time game closure announcement to all saved users
 async function sendGameClosureAnnouncement() {
-    const closureMessage = `🚨 *Important Announcement* 🚨`;
+    const closureMessage = `*Important Announcement*`;
 
     // Send the announcement to all stored chat IDs
     for (let chatId of userChatIds) {
