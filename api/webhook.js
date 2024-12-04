@@ -1,4 +1,5 @@
 const TelegramBot = require("node-telegram-bot-api");
+const fs = require("fs");
 
 const TOKEN = "8062611798:AAGblNZBc2xdpYfZXNXbhORXV5MJzQmdYVU";
 const gameName = "testiAIDeploy"; // Replace with your game's short name
@@ -9,23 +10,31 @@ const botUsername = 'testiAIDeploy_bot';
 
 const bot = new TelegramBot(TOKEN, { polling: false });
 
+let userChatIds = [];
+const chatIdsFilePath = './chat_ids.json'; // Path to save chat IDs
+
+// Load chat IDs from the JSON file (if it exists)
+if (fs.existsSync(chatIdsFilePath)) {
+    userChatIds = JSON.parse(fs.readFileSync(chatIdsFilePath));
+}
+
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
         const update = req.body;
 
         try {
 
-            // Handle /authorize command to check user_id
-            if (update.message && (update.message.text === '/authorize' || update.message.text === `/authorize@${botUsername}`)) {
-                const chatId = update.message.chat.id;
-                const userId = update.message.from.id;
-                const firstName = update.message.from.first_name;
+            // // Handle /authorize command to check user_id
+            // if (update.message && (update.message.text === '/authorize' || update.message.text === `/authorize@${botUsername}`)) {
+            //     const chatId = update.message.chat.id;
+            //     const userId = update.message.from.id;
+            //     const firstName = update.message.from.first_name;
 
-                // Inform the user that their authorization is complete
-                const authorizationMessage = `Hello, ${firstName}!\nYour authorization is complete, and we have successfully retrieved your user ID (${userId}).\n\nYou can now press the "Play Game" button to start playing! 🎮`;
+            //     // Inform the user that their authorization is complete
+            //     const authorizationMessage = `Hello, ${firstName}!\nYour authorization is complete, and we have successfully retrieved your user ID (${userId}).\n\nYou can now press the "Play Game" button to start playing! 🎮`;
 
-                await bot.sendMessage(chatId, authorizationMessage);
-            }
+            //     await bot.sendMessage(chatId, authorizationMessage);
+            // }
 
             // Handle /start or /game command
             if (update.message && (update.message.text === '/testGame' || update.message.text === `/testGame@${botUsername}`)) {
@@ -41,6 +50,12 @@ module.exports = async (req, res) => {
             if (update.message && update.message.text === '/startTest') {
                 const chatId = update.message.chat.id;
                 const firstName = update.message.from.first_name;
+
+                // Store chat ID if it's new
+                if (!userChatIds.includes(chatId)) {
+                    userChatIds.push(chatId);
+                    fs.writeFileSync(chatIdsFilePath, JSON.stringify(userChatIds)); // Save chat IDs to file
+                }
 
                 // Escape necessary characters for MarkdownV2
                 const welcomeMessage = `🎮 *Welcome to the iAI Robot Game\\!* 🚀
@@ -112,4 +127,18 @@ A fun Telegram game where you collect iAI tokens, upgrade your strategy, and com
     res.status(405).send('Method Not Allowed');
 }
 };
+
+// Function to send a one-time game closure announcement to all saved users
+async function sendGameClosureAnnouncement() {
+    const closureMessage = `🚨 *Important Announcement* 🚨`;
+
+    // Send the announcement to all stored chat IDs
+    for (let chatId of userChatIds) {
+        try {
+            await bot.sendMessage(chatId, closureMessage);
+        } catch (error) {
+            console.error(`Failed to send closure announcement to chatId ${chatId}:`, error);
+        }
+    }
+}
 
